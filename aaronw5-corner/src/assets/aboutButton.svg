@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="50" viewBox="0 0 200 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #c9ffe4;
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        font-size: 37.5px;
+        filter: url(#filter);
+        fill: #fff;
+        font-family: "Mark Pro";
+        font-weight: 800;
+      }
+    </style>
+    <filter id="filter" x="46" y="11" width="108" height="30" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dy="2" in="SourceAlpha"/>
+      <feGaussianBlur result="blur"/>
+      <feFlood result="flood" flood-opacity="0.7"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feBlend result="blend" in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect id="Rounded_Rectangle_2" data-name="Rounded Rectangle 2" class="cls-1" width="200" height="50" rx="5" ry="5"/>
+  <text id="About" class="cls-2" x="45.946" y="38.833">About</text>
+</svg>

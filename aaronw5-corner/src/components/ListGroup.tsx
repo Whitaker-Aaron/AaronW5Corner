@@ -1,28 +1,28 @@
 import { Fragment } from "react";
 import { useState } from "react";
 
-let items = [
-    'Aaron 1',
-    'Aaron 2',
-    'Aaron 3',
-    'Aaron 4',
-    'Aaron 5'
-]
+interface Props {
+    items: string[],
+    heading: string,
+    onSelectItem: (item: string) => void;
+}
+
 
 let selectedIndex = 0;
 
 
-function ListGroup() {
+function ListGroup(props: Props) {
 
     const [selectedItemIndex, updateItemIndex] = useState(-1);
     //arr[0] // variable 
     //arr[1] // updater function
+
     const message =
         (
             <>
-                <h1>List: </h1>
+                <h1>{props.heading}</h1>
                 <ul className="list-group">
-                    {getItems(selectedItemIndex, updateItemIndex)}
+                    {getItems(selectedItemIndex, updateItemIndex, props.items, props.onSelectItem)}
                 </ul>
             </>
         )
@@ -30,12 +30,13 @@ function ListGroup() {
     return message;
 }
 
-function getItems(selectedItemIndex, updateItemIndex) {
+function getItems(selectedItemIndex, updateItemIndex, items, onSelectItem) {
 
 
-    const handleClick = (index) => {
+    const handleClick = (index, item) => {
         console.log(index);
         updateItemIndex(index);
+        onSelectItem(item);
     }
 
     const isHighlighted = (index) => {
@@ -47,7 +48,7 @@ function getItems(selectedItemIndex, updateItemIndex) {
         <li
             className={isHighlighted(index)}
             key={item}
-            onClick={() => handleClick(index)}>
+            onClick={() => handleClick(index, item)}>
             {item}
         </li >);
 }
