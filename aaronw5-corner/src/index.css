@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }*/
+
+
+@font-face {
+  font-family: 'Mark Pro';
+  src: url('./assets/fonts/markpro.ttf') format('truetype');
+  /* Include other formats for broader compatibility */
+  font-weight: normal;
+  font-style: normal;
+}

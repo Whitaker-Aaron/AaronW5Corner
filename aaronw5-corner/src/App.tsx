@@ -1,62 +1,23 @@
-import ListGroup from "./components/ListGroup.tsx";
-import Alert from "./components/Alert.tsx";
-import Button from "./components/Button.tsx";
-import ModalComp from "./components/ModalComp.tsx";
-import { useState } from "react";
-import button1 from "./assets/aboutButton.svg.png";
-import button2 from "./assets/worksButton.svg.png";
-import button3 from "./assets/thoughtsButton.svg.png";
-import logo from "./assets/aaronw5logo.png";
-import banner from "./assets/bottomBanner.png";
+import Home from "./components/Home.tsx";
+import Works from "./components/Works.tsx";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 
 function App() {
-  let names = ["Aaron 1", "Aaron 2", "Aaron 3", "Aaron 4"];
-  let heading = "Today's names";
-  //let names2 = ["George 1", "Aaron 6", "Aaron 12", "Aaron 90"];
-  let heading2 = "Yesterday's names";
-  let message = "Good day!";
-  let buttonMessage = "Exit";
-  let increment = 0;
-
-  const [names2, updateNames2] = useState(["George 1", "Aaron 6", "Aaron 12", "Aaron 90"]);
-  const [nameDeleteButton, updateNameDelteButton] = useState(false);
-  const [show, setShow] = useState(false);
-
-  const handleShow = () => setShow(true);
-
-  const handleSelectItem = (item: String) => {
-    increment++;
-    console.log("Passing ", item, " into App.tsx");
-    console.log("# of times, list clicked: ", increment);
-  }
-
-  const handleButtonClick = () => {
-    console.log("Button clicked");
-    updateNameDelteButton(true);
-    updateNames2(names2.filter(a =>
-      a !== names2[names2.length - 1]
-    ));
-  }
-
-
 
   return <>
 
-    <div style={{ marginTop: 140, marginBottom: 0 }}>
-      <div style={{ marginLeft: "0", display: "flex", justifyContent: "center", padding: 0 }}>
-        <img style={{ scale: 0.75, padding: 0, marginRight: 0 }} src={logo}></img>
-        <p style={{ marginTop: 45, marginRight: 50, marginLeft: 0, fontFamily: "" }} className="display-1">'s Corner</p>
-      </div>
-      <p style={{ marginTop: 30, marginBottom: 20 }} className="text-center h3">The one stop shop for my experience, projects and opinions</p>
-      <div className="btn-group" style={{ marginTop: 40, marginLeft: "31.25%" }}>
-        <Button target={"AboutModal"} image={button1} disableAfterClick={false} message={"About"} onClick={handleShow}></Button>
-        <Button target={""} image={button2} disableAfterClick={false} message={"Works"} onClick={handleButtonClick}></Button>
-        <Button target={""} image={button3} disableAfterClick={false} message={"Thoughts"} onClick={handleButtonClick}></Button>
-      </div>
-      <img style={{ marginTop: "12.75%", maxWidth: "100%" }} src={banner}></img>
-    </div >
-    <ModalComp show={show} setShow={setShow} modalId={"AboutModal"}></ModalComp>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />}>
+        </Route>
+        <Route path="/works" element={<Works />}>
+        </Route>
+      </Routes>
+    </Router>
+
   </>
+
 }
 
 export default App;

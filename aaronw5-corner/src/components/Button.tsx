@@ -6,22 +6,24 @@ interface Props {
     disableAfterClick: boolean
     image,
     target: String,
-    onClick: () => void;
+    height,
+    width,
+    onClick?: () => void;
 }
 
 function Button(props: Props) {
     const [pressed, updateItemIndex] = useState(false);
-    const [style, setStyle] = useState({ scale: 1.0 });
+    const [style, setStyle] = useState({ scale: 1.0, height: props.height, width: props.width });
 
     return <>
 
         <div onMouseEnter={e =>
-            setStyle({ scale: 1.2 })
+            setStyle({ scale: 1.2, height: props.height, width: props.width })
         }
             onMouseLeave={e =>
-                setStyle({ scale: 1.0 })
+                setStyle({ scale: 1.0, height: props.height, width: props.width })
             }
-            style={{ marginLeft: 20, marginRight: 20 }}>
+            style={{ marginLeft: 20, marginRight: 20, width: props.width }}>
             {props.image !== '' ?
                 <img
                     src={props.image}
@@ -29,7 +31,7 @@ function Button(props: Props) {
                     data-bs-toggle="modal"
                     data-bs-target={"#" + props.target}
                     onClick={() =>
-                        handleClick(updateItemIndex, props.onClick, pressed)}>
+                        props.onClick ? handleClick(updateItemIndex, props.onClick, pressed) : ""} >
                 </img>
                 :
                 (
