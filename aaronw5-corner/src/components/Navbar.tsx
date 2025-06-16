@@ -10,9 +10,9 @@ interface Props {
 
 function Navbar(props: Props) {
     return <>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <p className="h4" style={{ marginLeft: 30, fontFamily: "Mark Pro" }}>{props.currentPage}</p>
-            {props.home ? <Link to="/"><Button height={50} width={50} target={""} image={home} disableAfterClick={false} message={"Works"}></Button></Link> : ""}
+        <div style={{ height: 72, backgroundImage: 'url(' + require('../assets/header.png') + ')', display: "flex", justifyContent: "space-between" }}>
+            <p className="h4" style={{ opacity: 0.5, marginTop: 5, marginLeft: 40, fontFamily: "Mark Pro" }}>{props.currentPage}</p>
+            {props.home ? <Link style={{ opacity: 1.0, marginRight: 45, marginBottom: 10 }} to="/"><Button height={50} width={50} target={""} image={home} disableAfterClick={false} message={"Works"}></Button></Link> : ""}
         </div >
 
     </>

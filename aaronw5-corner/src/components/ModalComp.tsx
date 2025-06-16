@@ -2,6 +2,11 @@
 import { Modal } from "react-bootstrap";
 import { useState } from "react";
 import logo from "../assets/profilePic.png";
+import mail from "../assets/mailIcon.png";
+import line from "../assets/modalLine.png";
+
+import Button from "./Button.tsx";
+import Tools from "./Tools.tsx"
 
 interface Props {
     modalId
@@ -27,15 +32,15 @@ function ModalComp(props: Props) {
     return (
         <>
             <Modal size="lg" show={props.show} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header style={{ backgroundColor: "#f3fcfe" }} closeButton>
                     <Modal.Title style={{ fontFamily: "Mark Pro" }}>{props.header}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ fontFamily: "Mark Pro" }}>
+                <Modal.Body style={{ backgroundColor: "#f3fcfe", fontFamily: "Mark Pro" }}>
                     {props.children}
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer style={{ backgroundColor: "#f3fcfe" }} >
                 </Modal.Footer>
-            </Modal>
+            </Modal >
         </>
     );
 }
@@ -50,12 +55,20 @@ function AboutModalComp(props: AboutProps) {
                 show={props.show}
                 setShow={props.setShow}>
                 <div style={{ margin: 0, display: "inline-flex" }}>
-                    <img style={{ marginBottom: 0, maxWidth: "15%", maxHeight: "15%" }} src={logo}></img>
+                    <img style={{ marginBottom: 0, maxWidth: 114.9, maxHeight: 114.9 }} src={logo}></img>
+                    <div>
+                        <p style={{ fontSize: 20, marginLeft: 20 }}>I'm a Software/QA Engineer with active experience in Graphic Design, Game Design and Art.</p>
+                        <div style={{ display: "inline-flex", justifyContent: "space-evenly" }}>
+                            <Button height={40} width={40} target={""} image={mail} disableAfterClick={false} message={"Works"} onClick={() => { }}></Button>
+                            <p style={{ marginTop: 5, opacity: 0.8, fontSize: 14, fontFamily: "Mark Pro" }}>aaronwhitaker690@gmail.com</p>
+                        </div>
 
-                    <p style={{ fontSize: 18, margin: 20, marginLeft: 20 }}>Contact Me: aaronwhitaker690@gmail.com<br></br>I'm a Software/QA Engineer with active experience in Graphic Design, Game Design and Art.</p>
+                    </div>
                 </div>
-                <div style={{ marginTop: 40 }}>
-                    <p className="h2">Education</p>
+                <div style={{ marginTop: 30, marginBottom: 30 }}>
+
+                    <p style={{ marginTop: 40 }} className="h2">Education</p>
+                    <br></br>
                     <li style={{ marginLeft: 50 }}>
                         <ul>I attended the University of Nevada, Reno, and graduated Cum Laude in May 2025. </ul>
                     </li>
@@ -63,15 +76,39 @@ function AboutModalComp(props: AboutProps) {
                         <ul>I hold a <strong>Bachelors of Science in Computer Science and Engineering</strong>, with minors in Digital Interactive Games and Mathematics.</ul>
                     </li>
                 </div>
-                <div style={{ marginTop: 40 }}>
+                <img style={{ padding: "none", margin: 0 }} src={line}></img>
+                <div style={{ marginTop: 20 }}>
+                    <p className="h2">Experience</p>
+                    <br></br>
+                    <li style={{ marginLeft: 50 }}>
+                        <ul>I currently work in Quality Engineering. </ul>
+
+                    </li>
+                    <li style={{ marginLeft: 50 }}>
+                        <ul>I have past experience at multiple start-ups, doing automated test writing, front end web development, and user experience design. </ul>
+                    </li>
+                    <li style={{ marginLeft: 50 }}>
+                        <ul>Some of the tools I've used are as follows: </ul>
+                    </li>
+                    <div style={{ display: "inline-flex", marginLeft: 82 }}>
+                        <Tools size={"small"} tool={"C++"}></Tools><Tools size={"small"} marginLeft={10} tool={"C#"}></Tools><Tools size={"large"} marginLeft={10} tool={"Adobe Photoshop"}></Tools>
+                        <Tools size={"medium"} marginLeft={10} tool={"Unity"}></Tools><Tools size={"small"} marginLeft={10} tool={"SQL"}></Tools><Tools size={"medium"} marginLeft={10} tool={"Angular"}></Tools>
+                    </div>
+                    <div style={{ display: "inline-flex", marginLeft: 82, marginTop: 7 }}>
+                        <Tools size={"large"} tool={"Android Studio"}></Tools><Tools marginLeft={10} size={"medium"} tool={"Python"}></Tools><Tools marginLeft={10} size={"medium"} tool={"HTML/CSS"}></Tools><Tools marginLeft={10} size={"medium"} tool={"React"}></Tools>
+                    </div>
+                </div>
+                <img style={{ padding: "none", margin: 0 }} src={line}></img>
+                <div style={{ marginTop: 20 }}>
                     <p className="h2">About Me</p>
+                    <br></br>
                     <li style={{ marginLeft: 50 }}>
                         <ul>I love video games! I'm always following the industry and I have experience in developing and releasing small scale game projects. </ul>
                         <ul>My favorite franchises are The Legend of Zelda, Xenoblade Chronicles, Final Fantasy and Splatoon. </ul>
                     </li>
                 </div>
 
-            </ModalComp>
+            </ModalComp >
         </>
     );
 }

@@ -20,3 +20,11 @@ code {
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Mark Pro Heavy';
+  src: url('./assets/fonts/Mark\ Pro\ Heavy.ttf') format('truetype');
+  /* Include other formats for broader compatibility */
+  font-weight: normal;
+  font-style: normal;
+}
