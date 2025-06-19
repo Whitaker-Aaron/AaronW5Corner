@@ -1,7 +1,7 @@
 
 import { Modal } from "react-bootstrap";
 import { useState } from "react";
-import logo from "../assets/profilePic.png";
+import logo from "../assets/profilePic_2.png";
 import mail from "../assets/mailIcon.png";
 import line from "../assets/modalLine.png";
 
@@ -48,6 +48,7 @@ function ModalComp(props: Props) {
 function AboutModalComp(props: AboutProps) {
     return (
         <>
+
             <ModalComp
                 header="Hi, I'm Aaron."
                 message="I'm a Software/QA Engineer with active experience in Graphic Design, Game Design and Art."
@@ -55,6 +56,7 @@ function AboutModalComp(props: AboutProps) {
                 show={props.show}
                 setShow={props.setShow}>
                 <div style={{ margin: 0, display: "inline-flex" }}>
+                    <br></br >
                     <img style={{ marginBottom: 0, maxWidth: 114.9, maxHeight: 114.9 }} src={logo}></img>
                     <div>
                         <p style={{ fontSize: 20, marginLeft: 20 }}>I'm a Software/QA Engineer with active experience in Graphic Design, Game Design and Art.</p>
@@ -65,7 +67,8 @@ function AboutModalComp(props: AboutProps) {
 
                     </div>
                 </div>
-                <div style={{ marginTop: 30, marginBottom: 30 }}>
+                <br></br >
+                <div style={{ marginTop: 60, marginBottom: 30 }}>
 
                     <p style={{ marginTop: 40 }} className="h2">Education</p>
                     <br></br>

@@ -52,7 +52,7 @@ function Home() {
     return <>
         <div className="bg-image" style={{ backgroundImage: 'url(' + require('../assets/background_1.png') + ')', height: "100vh", backgroundSize: "100%" }}>
             <br></br>
-            <Navbar home={false} currentPage="home"></Navbar>
+            <Navbar home={true} currentPage="home"></Navbar>
             <div style={{ marginTop: 150, marginBottom: 0 }}>
                 <div style={{ marginLeft: "0", display: "flex", justifyContent: "center", padding: 0 }}>
                     <img style={{ scale: 0.75, padding: 0, marginRight: 0 }} src={logo}></img>

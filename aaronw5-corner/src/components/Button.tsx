@@ -8,20 +8,21 @@ interface Props {
     target: String,
     height,
     width,
+    marginLeft?
     onClick?: () => void;
 }
 
 function Button(props: Props) {
     const [pressed, updateItemIndex] = useState(false);
-    const [style, setStyle] = useState({ scale: 1.0, height: props.height, width: props.width });
+    const [style, setStyle] = useState({ marginLeft: props.marginLeft, scale: 1.0, height: props.height, width: props.width });
 
     return <>
 
         <div onMouseEnter={e =>
-            setStyle({ scale: 1.2, height: props.height, width: props.width })
+            setStyle({ marginLeft: props.marginLeft, scale: 1.2, height: props.height, width: props.width })
         }
             onMouseLeave={e =>
-                setStyle({ scale: 1.0, height: props.height, width: props.width })
+                setStyle({ marginLeft: props.marginLeft, scale: 1.0, height: props.height, width: props.width })
             }
             style={{ marginLeft: 20, marginRight: 20, width: props.width }}>
             {props.image !== '' ?
