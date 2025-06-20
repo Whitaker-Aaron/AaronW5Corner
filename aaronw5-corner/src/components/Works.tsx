@@ -9,6 +9,8 @@ import backButton from "../assets/backButton.png";
 //LIGHTBOX
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import "yet-another-react-lightbox/plugins/captions.css";
+
 
 import WorksHeader from "./WorkHeader.tsx";
 import DevProject from "./DevProject.tsx";
@@ -16,18 +18,7 @@ import Design from "./Design.tsx";
 import Button from "./Button.tsx";
 
 //DESIGNS
-import art_1 from "../assets/art_1.jpg";
-import art_2 from "../assets/art_2.jpg";
-import art_3 from "../assets/art_3.png";
-import art_4 from "../assets/art_4.jpg";
-import art_5 from "../assets/art_5.jpg";
-import art_6 from "../assets/art_6.jpg";
-import art_7 from "../assets/art_7.png";
-import art_8 from "../assets/art_8.jpg";
-import art_9 from "../assets/art_9.jpg";
-import art_10 from "../assets/art_10.jpg";
-import art_11 from "../assets/art_11.jpg";
-import art_12 from "../assets/art_12.jpg";
+import art from "./Art.tsx";
 
 //DEV THUMBS
 import nexThumb from "../assets/nexulumThumb.png"
@@ -49,7 +40,9 @@ function Works() {
     const [projectsActivated, updateProjectsActivated] = useState(false);
     const [designsActivated, updateDesignsActivated] = useState(false);
     const [worksActivated, updateWorksActivated] = useState(true);
-    const [lightboxOpen, setLightboxOpen] = useState(true);
+
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [lightboxIndex, setLightboxIndex] = useState(0);
 
     const activateProjects = () => {
         updateProjectsActivated(true);
@@ -67,6 +60,16 @@ function Works() {
         updateWorksActivated(true);
     }
 
+    const handleExpandImage = (index) => {
+        setLightboxIndex(index);
+        setLightboxOpen(true);
+    }
+
+    //ART MAPPING 
+    const design = art.map((value, index) => {
+        return <Design onClick={() => handleExpandImage(index)} index={index} date={value.caption} img={value.design}></Design >
+    });
+
 
 
     return <>
@@ -78,7 +81,10 @@ function Works() {
                     <div style={{ height: "88%", width: "100%", display: "flex", justifyContent: "space-evenly" }}>
                         <div style={{ marginTop: 50, width: "50%" }}>
                             <img style={{ scale: 1, maxWidth: 769, maxHeight: 680, marginLeft: 60, marginRight: 60 }} src={projects}></img>
-                            <Button marginLeft={"140%"} height={80} width={80} target={""} image={backButton} disableAfterClick={false} message={"Works"} onClick={() => { activateWorks() }}></Button>
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <Button marginLeft={"140%"} height={80} width={80} target={""} image={backButton} disableAfterClick={false} message={"Works"} onClick={() => { activateWorks() }}></Button>
+                                <p style={{ fontFamily: "Mark Pro", fontSize: 24, marginTop: "0%", marginRight: "40%", textAlign: "center" }}>Projects I've written code<br></br> and helped develop on.</p>
+                            </div>
                         </div>
                         <div style={{ overflow: "auto", width: 990, backgroundImage: 'url(' + require('../assets/worksContainer.png') + ')' }}>
                             <div style={{ marginLeft: "5%" }}>
@@ -108,27 +114,17 @@ function Works() {
                     <div style={{ height: "88%", width: "100%", display: "flex", justifyContent: "space-evenly" }}>
                         <div style={{ marginRight: "18%", marginTop: 50, width: "30%" }}>
                             <img style={{ scale: 1, maxWidth: 769, maxHeight: 680, marginLeft: 30, marginRight: 120 }} src={designs}></img>
-                            <Button marginLeft={"140%"} height={80} width={80} target={""} image={backButton} disableAfterClick={false} message={"Works"} onClick={() => { activateWorks() }}></Button>
-
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <Button marginLeft={"140%"} height={80} width={80} target={""} image={backButton} disableAfterClick={false} message={"Works"} onClick={() => { activateWorks() }}></Button>
+                                <p style={{ fontFamily: "Mark Pro", fontSize: 24, marginTop: "0%", marginLeft: "25%", textAlign: "center" }}>Examples of designs and illustrations I've made in the past.</p>
+                            </div>
                         </div>
                         <div style={{ width: 990, backgroundImage: 'url(' + require('../assets/worksContainer.png') + ')' }}>
                             <div style={{
                                 overflow: "auto", marginLeft: "3% ", width: 946, height: 839, backgroundImage: 'url(' + require('../assets/artContainer.png') + ')'
                             }}>
                                 < div style={{ width: 800, maxWidth: 800, marginTop: 30, marginLeft: 50, display: "flex", flexWrap: "wrap" }}>
-                                    <Design date={"Jul. 2024"} img={art_1}></Design>
-                                    <Design date={"Aug. 2024"} img={art_2}></Design>
-                                    <Design date={"May 2024"} img={art_3}></Design>
-                                    <Design date={"May 2024"} img={art_4}></Design>
-                                    <Design date={"Mar. 2024"} img={art_5}></Design>
-                                    <Design date={"Jun. 2023"} img={art_7}></Design>
-                                    <Design date={"Mar. 2023"} img={art_6}></Design>
-                                    <Design date={"Feb. 2023"} img={art_8}></Design>
-                                    <Design date={"Jan. 2023"} img={art_9}></Design>
-                                    <Design date={"Dec. 2023"} img={art_10}></Design>
-                                    <Design date={"Dec. 2023"} img={art_11}></Design>
-                                    <Design date={"Jan. 2023"} img={art_12}></Design>
-
+                                    {design}
                                 </div>
                             </div>
                         </div>
@@ -137,11 +133,13 @@ function Works() {
                     <Lightbox
                         open={lightboxOpen}
                         close={() => setLightboxOpen(false)}
-                        slides={[
-                            { src: art_1 },
-                            { src: art_2 },
-                            { src: art_3 },
-                        ]}
+                        index={lightboxIndex}
+                        on={{ view: ({ index: lightboxIndex }) => setLightboxIndex(lightboxIndex) }}
+                        slides={
+                            art.map((value, index) => {
+                                return { src: value.design }
+                            })
+                        }
                     />
                 </>
 

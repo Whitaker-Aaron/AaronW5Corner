@@ -3,7 +3,9 @@ import { useState } from "react";
 
 interface Props {
     img,
-    date
+    date,
+    index?
+    onClick?: () => void;
 }
 
 function Design(props: Props) {
@@ -12,8 +14,9 @@ function Design(props: Props) {
     return <>
         <div style={{ position: "relative", padding: 20, scale: scale }}
             onMouseEnter={() => { setScale(1.1) }}
-            onMouseLeave={() => { setScale(1.0) }}>
-            <img style={{ boxShadow: "10px 10px 10px grey", maxWidth: "100%", maxHeight: 400, scale: 1 }} src={props.img}></img>
+            onMouseLeave={() => { setScale(1.0) }}
+            onClick={props.onClick}>
+            <img style={{ boxShadow: "10px 10px 10px grey", maxWidth: "100%", maxHeight: 450, scale: 1 }} src={props.img}></img>
             <div
                 style={{
                     marginTop: 10,
