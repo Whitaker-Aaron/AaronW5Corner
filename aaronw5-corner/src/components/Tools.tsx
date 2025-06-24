@@ -1,5 +1,7 @@
 
 import { useState } from "react";
+import { motion } from "motion/react";
+
 import file_small from '../assets/toolBackground.png';
 import file_medium from '../assets/toolBackground_medium.png';
 import file_large from '../assets/toolBackground_large.png';
@@ -45,13 +47,13 @@ function Tools(props: Props) {
 
 
     return <>
-        <div
+        <motion.div
             onMouseEnter={() => { setScale(1.1) }}
             onMouseLeave={() => { setScale(1.0) }}
             style={style}
         >
             <p style={{ fontSize: 15, marginBottom: 5, color: "#0c4047", opacity: 0.75, textAlign: "center", scale: scale }}>{props.tool}</p>
-        </div >
+        </motion.div >
     </>
 }
 

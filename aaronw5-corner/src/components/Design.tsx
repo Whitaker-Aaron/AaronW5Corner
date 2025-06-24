@@ -1,6 +1,9 @@
 
 import { useState } from "react";
 
+//MOTION 
+import { motion } from "motion/react";
+
 interface Props {
     img,
     date,
@@ -12,9 +15,8 @@ function Design(props: Props) {
     const [scale, setScale] = useState(1.0);
 
     return <>
-        <div style={{ position: "relative", padding: 20, scale: scale }}
-            onMouseEnter={() => { setScale(1.1) }}
-            onMouseLeave={() => { setScale(1.0) }}
+        <motion.div style={{ position: "relative", padding: 20, scale: scale }}
+            whileHover={{ scale: 1.1 }}
             onClick={props.onClick}>
             <img style={{ boxShadow: "10px 10px 10px grey", maxWidth: "100%", maxHeight: 450, scale: 1 }} src={props.img}></img>
             <div
@@ -26,7 +28,7 @@ function Design(props: Props) {
             >
                 <p style={{ fontSize: 15, marginBottom: 5, color: "#0c4047", opacity: 0.75, textAlign: "center" }}>{props.date}</p>
             </div >
-        </div>
+        </motion.div>
     </>
 }
 

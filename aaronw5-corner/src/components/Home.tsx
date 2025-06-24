@@ -6,13 +6,16 @@ import ModalComp from "./ModalComp.tsx";
 import AboutModalComp from "./ModalComp.tsx";
 import Navbar from "./Navbar.tsx";
 
+//MOTION 
+import { motion } from "motion/react";
+
 //ASSETS
-import button1 from "../assets/aboutButton.svg.png";
-import button2 from "../assets/worksButton.svg.png";
-import button3 from "../assets/thoughtsButton.svg.png";
+import button1 from "../assets/aboutButton.svg.webp";
+import button2 from "../assets/worksButton.svg.webp";
+import button3 from "../assets/thoughtsButton.svg.webp";
 import bluesky from "../assets/blueskyLogo.png";
 import youtube from "../assets/youtubeLogo.png";
-import logo from "../assets/aaronw5logo.png";
+import logo from "../assets/aaronw5logo.webp";
 import background from "../assets/background_1.png";
 
 //LIBRARIES
@@ -55,14 +58,19 @@ function Home() {
             <Navbar home={true} currentPage="home"></Navbar>
             <div style={{ marginTop: 150, marginBottom: 0 }}>
                 <div style={{ marginLeft: "0", display: "flex", justifyContent: "center", padding: 0 }}>
-                    <img style={{ scale: 0.75, padding: 0, marginRight: 0 }} src={logo}></img>
+                    <motion.img
+                        initial={{ rotate: 20 }}
+                        animate={{ rotate: 0 }}
+                        transition={{ delay: 0.5 }}
+                        style={{ scale: 0.75, padding: 0, marginRight: 0 }} src={logo}>
+                    </motion.img>
                     <p style={{ opacity: 0.8, marginTop: 45, marginRight: 50, marginLeft: 0, fontFamily: "Mark Pro" }} className="display-1">'s Corner</p>
                 </div>
                 <p style={{ opacity: 0.8, marginTop: 30, marginBottom: 20, fontFamily: "Mark Pro" }} className="text-center h3">The one stop shop for my experience, projects and opinions</p>
                 <div className="btn-group" style={{ marginTop: 40, marginLeft: "31.25%" }}>
-                    <Button height={62} width={215} target={"AboutModal"} image={button1} disableAfterClick={false} message={"About"} onClick={handleShow}></Button>
-                    <Link to="/works"><Button height={62} width={215} target={""} image={button2} disableAfterClick={false} message={"Works"} onClick={handleButtonClick}></Button></Link>
-                    <Button height={62} width={215} target={""} image={button3} disableAfterClick={false} message={"Thoughts"} onClick={handleButtonClick}></Button>
+                    <Button useFadeIn={true} height={62} width={215} target={"AboutModal"} image={button1} disableAfterClick={false} message={"About"} onClick={handleShow}></Button>
+                    <Link to="/works"><Button useFadeIn={true} height={62} width={215} target={""} image={button2} disableAfterClick={false} message={"Works"} onClick={handleButtonClick}></Button></Link>
+                    <Link to="/thoughts"><Button useFadeIn={true} height={62} width={215} target={""} image={button3} disableAfterClick={false} message={"Thoughts"} onClick={handleButtonClick}></Button></Link>
                 </div>
                 {/*<img style={{ marginTop: "12.75%", maxWidth: "100%" }} src={banner}></img>*/}
                 <div className="btn-group" style={{ marginTop: 180, marginLeft: "47.25%" }}>
