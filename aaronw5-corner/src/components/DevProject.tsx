@@ -34,7 +34,7 @@ function DevProject(props: Props) {
 
     return <>
         <div style={{
-            backgroundImage: 'url(' + require("../assets/devProject.png") + ')', marginTop: 20, marginRight: 40, width: 876, height: 524
+            backgroundImage: 'url(' + require("../assets/devProject.webp") + ')', marginTop: 20, marginRight: 40, width: 876, height: 524
         }}>
             <br></br>
             <div style={{ position: "relative", display: "flex", justifyContent: "space-between" }}>

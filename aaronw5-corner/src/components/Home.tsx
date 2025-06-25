@@ -53,7 +53,7 @@ function Home() {
 
     }
     return <>
-        <div className="bg-image" style={{ backgroundImage: 'url(' + require('../assets/background_1.png') + ')', height: "100vh", backgroundSize: "100%" }}>
+        <div className="bg-image" style={{ backgroundImage: 'url(' + require('../assets/background_1.webp') + ')', height: "100vh", backgroundSize: "100%" }}>
             <br></br>
             <Navbar home={true} currentPage="home"></Navbar>
             <div style={{ marginTop: 150, marginBottom: 0 }}>

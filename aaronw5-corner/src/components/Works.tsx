@@ -2,9 +2,9 @@
 import Navbar from "./Navbar.tsx";
 import stuff from "../assets/stuffI'veWorkedON.webp";
 import projects from "../assets/developmentProjects.png";
-import designs from "../assets/artDesigns.png";
-import designContainer from "../assets/artContainer.png"
-import backButton from "../assets/backButton.png";
+import designs from "../assets/artDesigns.webp";
+import designContainer from "../assets/artContainer.webp"
+import backButton from "../assets/backButton.webp";
 
 //LIGHTBOX
 import Lightbox from "yet-another-react-lightbox";
@@ -24,15 +24,15 @@ import art from "./Art.tsx";
 import { motion } from "motion/react";
 
 //DEV THUMBS
-import nexThumb from "../assets/nexulumThumb.png"
-import sudokuThumb from "../assets/sudokuThumb.png"
-import onitamaThumb from "../assets/onitamaThumb.png";
-import botbashThumb from "../assets/botbashThumb.png";
-import untitledThumb from "../assets/untitledThumb.png";
-import spaceThumb from "../assets/spaceThumb.png";
-import awakeThumb from "../assets/awakeThumb.png";
-import databaseThumb from "../assets/databaseThumb.png";
-import wiresharkThumb from "../assets/wiresharkThumb.png";
+import nexThumb from "../assets/nexulumThumb.webp"
+import sudokuThumb from "../assets/sudokuThumb.webp"
+import onitamaThumb from "../assets/onitamaThumb.webp";
+import botbashThumb from "../assets/botbashThumb.webp";
+import untitledThumb from "../assets/untitledThumb.webp";
+import spaceThumb from "../assets/spaceThumb.webp";
+import awakeThumb from "../assets/awakeThumb.webp";
+import databaseThumb from "../assets/databaseThumb.webp";
+import wiresharkThumb from "../assets/wiresharkThumb.webp";
 
 //LIBRARIES
 import { useState } from "react";
@@ -76,7 +76,7 @@ function Works() {
 
 
     return <>
-        <div className="bg-image" style={{ backgroundImage: 'url(' + require('../assets/background_1.png') + ')', height: "100vh", backgroundSize: "100%" }}>
+        <div className="bg-image" style={{ backgroundImage: 'url(' + require('../assets/background_1.webp') + ')', height: "100vh", backgroundSize: "100%" }}>
             <br></br>
             <Navbar home={true} currentPage="works"></Navbar>
             {projectsActivated ?
@@ -98,7 +98,7 @@ function Works() {
                             initial={{ opacity: 0.0 }}
                             animate={{ opacity: 1.0 }}
                             transition={{ delay: 0.2 }}
-                            style={{ overflow: "auto", width: 990, backgroundImage: 'url(' + require('../assets/worksContainer.png') + ')' }}>
+                            style={{ overflow: "auto", width: 990, backgroundImage: 'url(' + require('../assets/worksContainer.webp') + ')' }}>
                             <div style={{ marginLeft: "5%" }}>
                                 <DevProject thumb={nexThumb} tools={["C#", "Unity", "Photoshop", "Blender"]} hasLink={true} link={"www.nexulum.com"} description={"A 3D top-down exploration game with class and upgrade mechanics."} title={"Nexulum"}></DevProject>
                                 <DevProject thumb={onitamaThumb} tools={["C#", "Unity",]} hasLink={false} link={"github.com/Whitaker-Aaron/whitaker-aaron.github.io"} description={"Virtual board game ran in Unity, modeled after the original Onitama. \n\n\nDeveloped UI/Camera logic."} title={"Onitama Prototype"}></DevProject>
@@ -135,7 +135,7 @@ function Works() {
                             initial={{ opacity: 0.0 }}
                             animate={{ opacity: 1.0 }}
                             transition={{ delay: 0.2 }}
-                            style={{ width: 990, backgroundImage: 'url(' + require('../assets/worksContainer.png') + ')' }}>
+                            style={{ width: 990, backgroundImage: 'url(' + require('../assets/worksContainer.webp') + ')' }}>
                             <div style={{
                                 overflow: "auto", marginLeft: "3% ", width: 946, height: 839, backgroundImage: 'url(' + require('../assets/artContainer.png') + ')'
                             }}>
