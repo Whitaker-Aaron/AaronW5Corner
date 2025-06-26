@@ -28,3 +28,11 @@ code {
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Mark Pro Medium';
+  src: url('./assets/fonts/Mark\ Pro\ Medium.ttf') format('truetype');
+  /* Include other formats for broader compatibility */
+  font-weight: normal;
+  font-style: normal;
+}

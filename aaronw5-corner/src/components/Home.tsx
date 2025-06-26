@@ -64,9 +64,9 @@ function Home() {
                         transition={{ delay: 0.5 }}
                         style={{ scale: 0.75, padding: 0, marginRight: 0 }} src={logo}>
                     </motion.img>
-                    <p style={{ opacity: 0.8, marginTop: 45, marginRight: 50, marginLeft: 0, fontFamily: "Mark Pro" }} className="display-1">'s Corner</p>
+                    <p style={{ opacity: 0.9, marginTop: 45, marginRight: 50, marginLeft: 0, fontFamily: "Mark Pro" }} className="display-1">'s Corner</p>
                 </div>
-                <p style={{ opacity: 0.8, marginTop: 30, marginBottom: 20, fontFamily: "Mark Pro" }} className="text-center h3">The one stop shop for my experience, projects and opinions</p>
+                <p style={{ opacity: 0.9, marginTop: 30, marginBottom: 20, fontFamily: "Mark Pro" }} className="text-center h3">The one stop shop for my experience, projects and opinions</p>
                 <div className="btn-group" style={{ marginTop: 40, marginLeft: "31.25%" }}>
                     <Button useFadeIn={true} height={62} width={215} target={"AboutModal"} image={button1} disableAfterClick={false} message={"About"} onClick={handleShow}></Button>
                     <Link to="/works"><Button useFadeIn={true} height={62} width={215} target={""} image={button2} disableAfterClick={false} message={"Works"} onClick={handleButtonClick}></Button></Link>
