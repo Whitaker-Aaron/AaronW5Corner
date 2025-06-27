@@ -12,19 +12,27 @@ interface Props {
     height,
     width,
     marginLeft?
+    marginTop?
+    marginRight?
     useFadeIn?
+    negateMarginLeft?
     onClick?: () => void;
 }
 
 function Button(props: Props) {
+    let defaultMarginLeft = 20;
+    if (props.negateMarginLeft) {
+        defaultMarginLeft = 0;
+    }
+
     const [pressed, updateItemIndex] = useState(false);
-    const [style, setStyle] = useState({ marginLeft: props.marginLeft, scale: 1.0, height: props.height, width: props.width });
+    const [style, setStyle] = useState({ marginRight: props.marginRight, marginTop: props.marginTop, marginLeft: props.marginLeft, scale: 1.0, height: props.height, width: props.width });
 
     return <>
 
         <motion.div
             whileHover={{ scale: 1.2 }}
-            style={{ marginLeft: 20, marginRight: 20, width: props.width }}>
+            style={{ marginLeft: defaultMarginLeft, marginRight: 20, width: props.width }}>
             {props.useFadeIn ? <motion.img
                 initial={{ opacity: 0.0 }}
                 animate={{ opacity: 1.0 }}
