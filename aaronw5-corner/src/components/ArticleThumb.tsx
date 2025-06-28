@@ -16,6 +16,9 @@ interface Props {
 }
 
 function ArticleThumb(props: Props) {
+    //CONVERT READTIME TO INTERGER 
+    const readTime = props.readTime;
+
     return <>
         <div style={{
             textWrap: "balance", backgroundImage: 'url(' + require("../assets/devProject.webp") + ')', marginTop: 20, marginRight: 40, width: 876, height: 524
@@ -30,7 +33,7 @@ function ArticleThumb(props: Props) {
                     <div style={{ marginTop: 35, justifyContent: "space-between", display: "flex", width: 800 }}>
                         <div style={{ display: "table-column", justifyContent: "space-between" }}>
                             <p style={{ overflowWrap: "break-word", padding: 10, opacity: 0.9, fontFamily: "Mark Pro", maxHeight: 500, marginLeft: 72 }}>{props.description}</p>
-                            <p style={{ marginTop: 30, fontSize: 22, padding: 0, marginLeft: 82, fontFamily: "Mark Pro" }}>Read time: <strong>{props.readTime} min</strong></p>
+                            <p style={{ marginTop: 30, fontSize: 22, padding: 0, marginLeft: 82, fontFamily: "Mark Pro" }}>Read time: <strong>{readTime} min</strong></p>
                             <p style={{ fontSize: 12, padding: 0, marginLeft: 82, fontFamily: "Mark Pro Medium" }}>Uploaded: {props.date}</p>
                         </div>
                         <img style={{ boxShadow: "8px 8px 7.5px grey", maxWidth: 384, maxHeight: 216 }} src={props.thumb}></img>
