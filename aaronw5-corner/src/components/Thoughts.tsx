@@ -8,6 +8,8 @@ import backButton from "../assets/backButton.png";
 import line from "../assets/modalLine.png";
 import ReactMarkdown from 'react-markdown'
 
+import test_md from "../assets/markdown/test.md";
+
 //LIGHTBOX
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -15,6 +17,9 @@ import "yet-another-react-lightbox/plugins/captions.css";
 
 //MOTION 
 import { motion } from "motion/react";
+
+//IMAGE SIZE
+import imageSize from "fs-imagesize";
 
 //ARTICLES
 import articles from "./Articles.tsx";
@@ -29,9 +34,15 @@ import ArticleThumb from "./ArticleThumb.tsx";
 
 
 //LIBRARIES
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Thoughts() {
+
+
+
+    const [markdown, setMarkdown] = useState("");
+
+
 
     //ARTICLE VARIABLES
     //USE STATES
@@ -47,6 +58,12 @@ function Thoughts() {
         return <ArticleThumb onClick={() => handleOpenArticle(index)} thumb={value.thumb} index={index} readTime={value.readTime} date={value.date} header={value.header} description={value.description}></ArticleThumb >
     });
 
+    useEffect(() => {
+
+    }, []);
+
+
+
     //FUNCTIONS
     const handleOpenArticle = (index) => {
 
@@ -55,8 +72,15 @@ function Thoughts() {
         setArticleHeader(articles[index].header);
         setArticleDate(articles[index].date);
         setArticleDescription(articles[index].description);
-        setArticleThumb(articles[index].thumb)
-        setArticleBody(articles[index].body);
+        setArticleThumb(articles[index].thumb);
+
+        fetch(articles[index].body)
+            .then((res) => res.text())
+            .then((text) => setMarkdown(text));
+
+
+
+
 
 
         //Change the DOM to reflect the current article 
@@ -82,9 +106,9 @@ function Thoughts() {
                     <Navbar home={true} currentPage="thoughts"></Navbar>
                     <div style={{ height: "88%", width: "100%", display: "flex", justifyContent: "space-between" }}>
                         <div style={{ marginLeft: "5%", marginRight: "8%", marginTop: 50, width: "30%" }}>
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                            <div style={{ maxWidth: "100% ", maxHeight: "100% ", display: "flex", justifyContent: "space-between" }}>
                                 <Button negateMarginLeft={true} marginRight={0} marginTop={"15px"} height={70} width={70} target={""} image={backButton} disableAfterClick={false} message={"Works"} onClick={() => { handleReturnButton() }}></Button>
-                                <p className="h1" style={{ maxWidth: "100%", maxHeight: "100%", marginLeft: "3%", opacity: 0.9, fontFamily: "Mark Pro" }}>{articleHeader}</p>
+                                <p className="h1" style={{ width: "100%", maxWidth: "100% ", maxHeight: "100% ", marginLeft: "3% ", opacity: 0.9, fontFamily: "Mark Pro" }}>{articleHeader}</p>
                             </div>
                             <p style={{ fontSize: 12, marginTop: 35, fontFamily: "Mark Pro Medium" }}>Uploaded: {articleDate}</p>
                             <p style={{ opacity: 0.8, fontSize: 20, marginTop: "0%" }}>{articleDescription}</p>
@@ -94,11 +118,11 @@ function Thoughts() {
                             initial={{ opacity: 0.0 }}
                             animate={{ opacity: 1.0 }}
                             transition={{ delay: 0.2 }}
-                            style={{ backgroundRepeat: "no-repeat", width: 1300, backgroundImage: 'url(' + require('../assets/worksContainer.webp') + ')' }}>
-                            <div style={{ overflow: "auto", backgroundRepeat: "no-repeat", backgroundImage: 'url(' + require('../assets/articleContainer.png'), width: 1050, height: 820, whiteSpace: "pre-wrap", fontFamily: "Mark Pro", marginTop: 20, marginLeft: "2.5%" }}>
+                            style={{ maxWidth: "100%", maxHeight: "100%", backgroundRepeat: "no-repeat", width: 1100, backgroundImage: 'url(' + require('../assets/worksContainer.webp') + ')' }}>
+                            <div style={{ overflow: "auto", backgroundRepeat: "no-repeat", backgroundImage: 'url(' + require('../assets/articleContainer.png'), maxWidth: "100%", maxHeight: "100%", width: 1050, height: 820, whiteSpace: "pre-wrap", fontFamily: "Mark Pro", marginTop: 20, marginLeft: "2.5%" }}>
                                 <div style={{ overflow: "auto", marginTop: 10, maxHeight: 800, padding: 60 }}>
-                                    <ReactMarkdown >
-                                        {articleBody}
+                                    <ReactMarkdown skipHtml={false}>
+                                        {markdown}
                                     </ReactMarkdown>
                                 </div>
                             </div>
