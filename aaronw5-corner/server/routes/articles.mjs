@@ -15,4 +15,13 @@ router.get("/", async (req, res) => {
     res.send(results).status(200);
 });
 
+router.get("/:router", async (req, res) => {
+    let collection = await db.collection("Articles");
+    let query = { router: req.params.router };
+    let result = await collection.findOne(query);
+
+    if (!result) res.send("Not found").status(404);
+    else res.send(result).status(200);
+});
+
 export default router;

@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 //MOTION 
-import { motion } from "motion/react";
+import { motion, scale } from "motion/react";
 
 interface Props {
     message: String
@@ -16,6 +16,8 @@ interface Props {
     marginRight?
     useFadeIn?
     negateMarginLeft?
+    changePictureOnClick?
+    secondImage?
     onClick?: () => void;
 }
 
@@ -25,13 +27,19 @@ function Button(props: Props) {
         defaultMarginLeft = 0;
     }
 
-    const [pressed, updateItemIndex] = useState(false);
+    const [image, updateImage] = useState('');
+    if (props.image && image === '') {
+        updateImage(props.image);
+    }
+
+    const [pressed, updatePressed] = useState(false);
+    const [scaleWhenHover, updateHover] = useState(1.2);
     const [style, setStyle] = useState({ marginRight: props.marginRight, marginTop: props.marginTop, marginLeft: props.marginLeft, scale: 1.0, height: props.height, width: props.width });
 
     return <>
 
         <motion.div
-            whileHover={{ scale: 1.2 }}
+            whileHover={{ scale: scaleWhenHover }}
             style={{ marginLeft: defaultMarginLeft, marginRight: 20, width: props.width }}>
             {props.useFadeIn ? <motion.img
                 initial={{ opacity: 0.0 }}
@@ -42,17 +50,20 @@ function Button(props: Props) {
                 data-bs-toggle="modal"
                 data-bs-target={"#" + props.target}
                 onClick={() =>
-                    props.onClick ? handleClick(updateItemIndex, props.onClick, pressed) : ""} >
+                    props.onClick ? handleClick(updatePressed, props.onClick, pressed) : ""} >
             </motion.img> : (
                 props.image !== '' ?
                     <img
 
-                        src={props.image}
+                        src={image}
                         style={style}
                         data-bs-toggle="modal"
                         data-bs-target={"#" + props.target}
                         onClick={() =>
-                            props.onClick ? handleClick(updateItemIndex, props.onClick, pressed) : ""} >
+                            props.onClick ? (
+                                props.secondImage ? handleClick(updatePressed, props.onClick, pressed, updateImage, props.secondImage, props.disableAfterClick, updateHover)
+                                    : handleClick(updatePressed, props.onClick, pressed)
+                            ) : ""} >
                     </img>
                     :
                     (
@@ -60,7 +71,7 @@ function Button(props: Props) {
                             <h1
                                 style={style}
                                 onClick={() =>
-                                    handleClick(updateItemIndex, props.onClick, pressed)}
+                                    handleClick(updatePressed, props.onClick, pressed)}
                                 data-bs-target={"#" + props.target}
                                 className="text-center btn btn-primary btn-lg btn-block">{props.message}
                             </h1>
@@ -68,7 +79,7 @@ function Button(props: Props) {
                             <h1
                                 style={{ width: 200, height: 50 }}
                                 data-bs-target={"#" + props.target}
-                                onClick={() => handleClick(updateItemIndex, props.onClick, pressed)}
+                                onClick={() => handleClick(updatePressed, props.onClick, pressed)}
                                 className="text-center btn btn-primary btn-lg btn-block disabled">{props.message}
                             </h1>
                     )
@@ -79,10 +90,12 @@ function Button(props: Props) {
     </>
 }
 
-function handleClick(updateState, onClick, pressed) {
+function handleClick(updateState, onClick, pressed, updateImage?, doubleImage?, disableAfterClick?, updateScale?) {
     console.log(pressed);
     updateState(true);
     onClick();
+    if (doubleImage) { updateImage(doubleImage) }
+    if (disableAfterClick) { updateScale(1.0) }
 
 }
 

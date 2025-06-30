@@ -4,6 +4,8 @@ import Tools from "./Tools.tsx"
 
 
 import { motion } from "motion/react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 interface Props {
     header,
@@ -18,6 +20,15 @@ interface Props {
 function ArticleThumb(props: Props) {
     //CONVERT READTIME TO INTERGER 
     const readTime = props.readTime;
+    const routerLink = "/thoughts/" + props.header.replace(/\s+/g, '-').toLowerCase();
+
+
+    //NAVIGATION FUNCTION 
+    const navigate = useNavigate();
+    const navigateTo = () => {
+        navigate(routerLink, { state: { id: 1, name: 'sabaoon' } });
+    }
+
 
     return <>
         <div style={{
@@ -39,7 +50,7 @@ function ArticleThumb(props: Props) {
                         <img style={{ boxShadow: "8px 8px 7.5px grey", maxWidth: 384, maxHeight: 216 }} src={props.thumb}></img>
                     </div>
                     <motion.div
-                        onClick={props.onClick}
+                        onClick={() => { navigateTo() }}
                         whileHover={{ scale: 1.1, boxShadow: "5px 5px 7px grey" }}
                         style={{ border: "2px solid #0093a9", backgroundColor: "#b4f3fc", boxShadow: "2px 2px 2px grey", borderRadius: 15, padding: 10, marginTop: 10, marginLeft: 75, width: 125, height: 50 }}>
                         <p style={{ color: "black", opacity: 0.9, fontFamily: "Mark Pro Medium", fontSize: 20, marginBottom: 0, textAlign: "center" }}>Read</p>
