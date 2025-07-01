@@ -24,4 +24,16 @@ router.get("/:router", async (req, res) => {
     else res.send(result).status(200);
 });
 
+router.patch("/:router", async (req, res) => {
+    let collection = await db.collection("Articles");
+    const query = { router: req.params.router };
+    const updates = {
+        $set: { hearts: req.body.hearts }
+    };
+
+    let result = await collection.updateOne(query, updates);
+    if (!result) res.send("Not found").status(404);
+    else res.send(result).status(200);
+});
+
 export default router;

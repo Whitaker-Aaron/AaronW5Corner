@@ -2,7 +2,7 @@
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import React, { useEffect, useState, Component } from 'react'
 
-
+//ASSETS
 import Navbar from "./Navbar.tsx";
 import heart_unfilled from "../assets/heartIcon_unclicked.png"
 import heart_filled from "../assets/heartIcon_uclicked.png"
@@ -12,7 +12,10 @@ import thoughts from "../assets/latestThoughts.png";
 import designContainer from "../assets/artContainer.png"
 import backButton from "../assets/backButton.png";
 import line from "../assets/modalLine.png";
+
+
 import ReactMarkdown from 'react-markdown'
+import { CookiesProvider, useCookies } from 'react-cookie'
 
 import test_md from "../assets/markdown/test.md";
 
@@ -35,13 +38,27 @@ function ArticlePage(props: Props) {
     const location = useLocation();
     const id = useParams();
 
+    //RERENDER PAGE 
+    const [key, setKey] = useState(0)
+
     //USE STATES
     const [article, setArticle] = useState({});
     const [markdown, setMarkdown] = useState("");
 
+    //COOKIES FOR PAGE
+    const cookieName = "heartPressed" + id.id
+    const [cookies, setCookies] = useCookies([cookieName])
+
     useEffect(() => {
+        fetchArticleData()
+    }, [])
 
+    //POPULATE DATA 
+    const populateArticleData = () => {
 
+    }
+
+    const fetchArticleData = () => {
         fetch("http://localhost:5000/articles/" + id.id).then(
             response => response.json()
         ).then(
@@ -50,16 +67,32 @@ function ArticlePage(props: Props) {
                 setMarkdown(data.body.data)
             }
         )
+    }
 
-    }, [])
-
-    //POPULATE DATA 
-    const populateArticleData = () => {
-
+    const patchArticleData = () => {
+        fetch("http://localhost:5000/articles/" + id.id, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(
+                { hearts: article.hearts }
+            )
+        }).then(resp => resp.json());
     }
 
     const handleReturnButton = () => {
         navigateTo("/thoughts")
+    }
+
+    const handleHeartButton = () => {
+
+        if (cookies[cookieName] === true) return;
+        article.hearts += 1;
+        setArticle(article);
+        setKey(key + 1)
+        setCookies(cookieName, true, { path: "http://localhost:5000/articles/" + id.id })
+        patchArticleData();
     }
 
     const navigate = useNavigate();
@@ -72,6 +105,7 @@ function ArticlePage(props: Props) {
         }>
             <br></br>
             <Navbar home={true} currentPage="thoughts"></Navbar>
+
             <div style={{ height: "88%", width: "100%", display: "flex", justifyContent: "space-between" }}>
                 <div style={{ marginLeft: "5%", marginRight: "8%", marginTop: 50, width: "30%" }}>
                     <div style={{ maxWidth: "100% ", maxHeight: "100% ", display: "flex", justifyContent: "space-between" }}>
@@ -82,7 +116,7 @@ function ArticlePage(props: Props) {
                     <div style={{ marginTop: 12, maxWidth: "92% ", maxHeight: "100% ", display: "flex", justifyContent: "space-between" }}>
                         <p style={{ fontSize: 12, marginTop: 15, fontFamily: "Mark Pro Medium" }}>Uploaded: {article.date}</p>
                         <div style={{ maxWidth: "10% ", maxHeight: "100% ", display: "flex", justifyContent: "space-evenly" }}>
-                            <Button onClick={() => { }} marginTop={0} height={40} width={40} target={""} secondImage={heart_filled} image={heart_unfilled} disableAfterClick={true} message={""}></Button>
+                            <Button onClick={() => { handleHeartButton() }} pressedOnLoad={cookies[cookieName]} marginTop={0} height={40} width={40} target={""} secondImage={heart_filled} image={heart_unfilled} disableAfterClick={true} message={""}></Button>
                             {
                                 article.hearts ?
                                     <p style={{ opacity: 0.65, fontSize: 16, marginRight: 10, marginTop: 12, fontFamily: "Mark Pro Medium" }}>{article.hearts}</p>
@@ -109,6 +143,7 @@ function ArticlePage(props: Props) {
                     </div>
                 </motion.div>
             </div>
+
         </div >
     </>
 }

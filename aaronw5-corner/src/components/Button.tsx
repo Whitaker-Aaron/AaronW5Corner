@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { CookiesProvider } from "react-cookie";
 
 //MOTION 
 import { motion, scale } from "motion/react";
@@ -11,6 +12,7 @@ interface Props {
     target: String,
     height,
     width,
+    pressedOnLoad?
     marginLeft?
     marginTop?
     marginRight?
@@ -36,8 +38,13 @@ function Button(props: Props) {
     const [scaleWhenHover, updateHover] = useState(1.2);
     const [style, setStyle] = useState({ marginRight: props.marginRight, marginTop: props.marginTop, marginLeft: props.marginLeft, scale: 1.0, height: props.height, width: props.width });
 
-    return <>
+    if (props.pressedOnLoad && !pressed) {
+        updatePressed(true);
+        if (props.secondImage) { updateImage(props.secondImage) }
+        if (props.disableAfterClick) { updateHover(1.0) }
+    }
 
+    return <>
         <motion.div
             whileHover={{ scale: scaleWhenHover }}
             style={{ marginLeft: defaultMarginLeft, marginRight: 20, width: props.width }}>
@@ -98,5 +105,7 @@ function handleClick(updateState, onClick, pressed, updateImage?, doubleImage?, 
     if (disableAfterClick) { updateScale(1.0) }
 
 }
+
+
 
 export default Button
