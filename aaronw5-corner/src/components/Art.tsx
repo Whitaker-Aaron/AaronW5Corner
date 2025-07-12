@@ -27,8 +27,10 @@ import art_24 from "../assets/art_24.webp";
 import art_25 from "../assets/art_25.webp";
 import art_26 from "../assets/art_26.webp";
 import art_27 from "../assets/art_27.webp";
+import art_28 from "../assets/art_28.png";
 
 const art = [
+    { design: art_28, caption: "Jul. 2025" },
     { design: art_27, caption: "Jun. 2025" },
     { design: art_13, caption: "Jul. 2024" },
     { design: art_1, caption: "Jul. 2024" },
