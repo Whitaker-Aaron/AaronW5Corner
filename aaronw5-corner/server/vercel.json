@@ -9,15 +9,7 @@
     "rewrites": [
         {
             "source": "/(.*)",
-            "destination": "server.mjs",
-            "methods": [
-                "GET",
-                "POST",
-                "PUT",
-                "PATCH",
-                "DELETE",
-                "OPTIONS"
-            ]
+            "destination": "server.mjs"
         }
     ]
 }
