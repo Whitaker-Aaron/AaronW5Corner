@@ -59,7 +59,7 @@ function ArticlePage(props: Props) {
     }
 
     const fetchArticleData = () => {
-        fetch("http://localhost:5000/articles/" + id.id).then(
+        fetch("https://aaron-w5-corner-dvpp.vercel.app/articles/" + id.id).then(
             response => response.json()
         ).then(
             data => {
@@ -70,7 +70,7 @@ function ArticlePage(props: Props) {
     }
 
     const patchArticleData = () => {
-        fetch("http://localhost:5000/articles/" + id.id, {
+        fetch("https://aaron-w5-corner-dvpp.vercel.app/articles/" + id.id, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -91,7 +91,7 @@ function ArticlePage(props: Props) {
         article.hearts += 1;
         setArticle(article);
         setKey(key + 1)
-        setCookies(cookieName, true, { path: "http://localhost:5000/articles/" + id.id })
+        setCookies(cookieName, true, { path: "https://aaron-w5-corner-dvpp.vercel.app/articles/" + id.id })
         patchArticleData();
     }
 

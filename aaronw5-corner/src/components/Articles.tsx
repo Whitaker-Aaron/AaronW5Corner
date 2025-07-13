@@ -11,7 +11,7 @@ function Articles(props: Props) {
     useEffect(() => {
 
 
-        fetch("http://localhost:5000/articles").then(
+        fetch("https://aaron-w5-corner-dvpp.vercel.app/articles").then(
             response => response.json()
         ).then(
             data => {
