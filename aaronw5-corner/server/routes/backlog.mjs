@@ -25,9 +25,8 @@ let db = conn.db("AaronW5Corner");
 
 // Get a list of 50 posts
 router.get("/", async (req, res) => {
-    let collection = await db.collection("Articles");
+    let collection = await db.collection("Backlog");
     let results = await collection.find({})
-        .limit(50)
         .toArray();
     console.log(results);
 
@@ -35,7 +34,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:router", async (req, res) => {
-    let collection = await db.collection("Articles");
+    let collection = await db.collection("Backlog");
     let query = { router: req.params.router };
     let result = await collection.findOne(query);
 
@@ -43,17 +42,32 @@ router.get("/:router", async (req, res) => {
     else res.send(result).status(200);
 });
 
-router.patch("/:router", async (req, res) => {
-    let collection = await db.collection("Articles");
+router.post("/:router", async (req, res) => {
+    let collection = await db.collection("Backlog");
     const query = { router: req.params.router };
     const updates = {
-        $set: { hearts: req.body.hearts }
+        id: req.body.id, status: req.body.status, game: req.body.game, date: req.body.date, rating: req.body.rating
     };
 
-    let result = await collection.updateOne({ _id: ObjectId(req.params.router) }, updates);
+    let result = await collection.insertOne(updates);
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);
 });
+
+router.patch("/:router", async (req, res) => {
+    let collection = await db.collection("Backlog");
+    const query = { router: req.params.router };
+
+    const updates = {
+        $set: { id: req.body.id, status: req.body.status, game: req.body.game, date: req.body.date, rating: req.body.rating }
+    };
+
+    let result = await collection.updateOne({ _id: new ObjectId(req.params.router) }, updates);
+    console.log(result);
+    if (!result) res.send("Not found").status(404);
+    else res.send(result).status(200);
+});
+
 
 
 export default router;
