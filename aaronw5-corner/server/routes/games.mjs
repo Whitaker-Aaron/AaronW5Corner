@@ -36,7 +36,7 @@ router.get("/cover/:id", async (req, res) => {
     let result = ''
     query = query.router;
     console.log(query)
-    let query_string = "fields *; where id = " + query + ";limit 200;"
+    let query_string = "fields *; where id = " + query + ";limit 500;"
     const response = await axios.post('https://api.igdb.com/v4/covers', query_string, {
         headers: {
             'Content-Type': 'text/plain',
@@ -61,7 +61,7 @@ router.get("/release/:id", async (req, res) => {
     let result = ''
     query = query.router;
     console.log(query)
-    let query_string = "fields *; where id = " + query + ";limit 200;"
+    let query_string = "fields *; where id = " + query + ";limit 500;"
     //let query_string = "fields *;limit 50;"
     const response = await axios.post('https://api.igdb.com/v4/release_dates', query_string, {
         headers: {
@@ -88,7 +88,7 @@ router.get("/game/:id", async (req, res) => {
     let result = ''
     query = query.router;
     console.log(query)
-    let query_string = "fields *; where id = " + query + ";limit 200;"
+    let query_string = "fields *; where id = " + query + ";limit 500;"
     const response = await axios.post('https://api.igdb.com/v4/games', query_string, {
         headers: {
             'Content-Type': 'text/plain',
@@ -114,7 +114,7 @@ router.get("/game-query/:id", async (req, res) => {
     query = query.router;
     console.log(query)
     //let query_string = "fields *; search " + query + ";"
-    let query_string = "fields name, cover; search \"" + query + "\";limit 200;"
+    let query_string = "fields name, cover; search \"" + query + "\";limit 500;"
     const response = await axios.post('https://api.igdb.com/v4/games', query_string, {
         headers: {
             'Content-Type': 'text/plain',
