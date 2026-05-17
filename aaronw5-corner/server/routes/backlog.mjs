@@ -44,6 +44,17 @@ router.get("/:router", async (req, res) => {
     else res.send(result).status(200);
 });
 
+router.get("/playing", async (req, res) => {
+    let collection = await db.collection("Backlog");
+    //const { limit } = req.body
+    let query = {status:"playing"};
+    let results = await collection.find(query)
+        .toArray();
+    console.log(results);
+
+    res.send(results).status(200);
+});
+
 router.post("/:router", async (req, res) => {
     let collection = await db.collection("Backlog");
     const query = { router: req.params.router };
