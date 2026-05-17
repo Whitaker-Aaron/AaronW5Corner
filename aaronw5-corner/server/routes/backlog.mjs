@@ -44,7 +44,7 @@ router.get("/:router", async (req, res) => {
     else res.send(result).status(200);
 });
 
-router.get("/playing", async (req, res) => {
+router.get("/playing/get", async (req, res) => {
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {status:'playing'}
