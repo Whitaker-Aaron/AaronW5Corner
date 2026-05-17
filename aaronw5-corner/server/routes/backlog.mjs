@@ -28,7 +28,29 @@ router.get("/", async (req, res) => {
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {};
-    let results = await collection.find({}).sort({date: -1}).limit(6)
+    let results = await collection.find({}).sort({date: -1})
+        .toArray();
+    console.log(results);
+
+    res.send(results).status(200);
+});
+
+router.get("/backlogged/get", async (req, res) => {
+    let collection = await db.collection("Backlog");
+    //const { limit } = req.body
+    let query = {status: 'backlog'};
+    let results = await collection.find(query).sort({date: -1})
+        .toArray();
+    console.log(results);
+
+    res.send(results).status(200);
+});
+
+router.get("/completed/get", async (req, res) => {
+    let collection = await db.collection("Backlog");
+    //const { limit } = req.body
+    let query = {status: 'finished'};
+    let results = await collection.find(query).sort({date: -1})
         .toArray();
     console.log(results);
 
