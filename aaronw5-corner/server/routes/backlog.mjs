@@ -47,7 +47,7 @@ router.get("/:router", async (req, res) => {
 router.get("/playing", async (req, res) => {
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
-    let query = {status:"playing"};
+    let query = {status:'playing'}
     let results = await collection.find(query)
         .toArray();
     console.log(results);
