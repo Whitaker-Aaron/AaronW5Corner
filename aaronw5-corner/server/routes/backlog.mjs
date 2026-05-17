@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {};
-    let results = await collection.find({}).sort({date: -1})
+    let results = await collection.find({}).sort({date: -1}.limit(6))
         .toArray();
     console.log(results);
 
