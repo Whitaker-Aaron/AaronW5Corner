@@ -3,6 +3,7 @@
 import "./loadEnvironment.mjs";
 import articles from "./routes/articles.mjs";
 import latest from "./routes/latest.mjs"
+import goty from "./routes/goty.mjs"
 import games from "./routes/games.mjs"
 import backlog from "./routes/backlog.mjs"
 import axios from "axios";
@@ -38,6 +39,7 @@ getAuthToken()
 // Load the /articles routes
 app.use("/articles", articles);
 app.use("/latest", latest);
+app.use("/goty", goty);
 app.use("/backlog", backlog);
 app.use("/games", function (req, res, next) {
     req.conn_config = {
