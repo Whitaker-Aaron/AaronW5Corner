@@ -35,6 +35,17 @@ router.get("/", async (req, res) => {
     res.send(results).status(200);
 });
 
+router.get("/all/get", async (req, res) => {
+    let collection = await db.collection("Backlog");
+    //const { limit } = req.body
+    let query = {};
+    let results = await collection.find({})
+        .toArray();
+    console.log(results);
+
+    res.send(results).status(200);
+});
+
 router.get("/backlogged/get", async (req, res) => {
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
