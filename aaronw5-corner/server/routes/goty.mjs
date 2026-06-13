@@ -30,4 +30,13 @@ router.get("/", async (req, res) => {
     res.send(results).status(200);
 });
 
+router.get("/:id", async (req, res) => {
+    let collection = await db.collection("GOTY");
+    let results = await collection.find({ year: req.params.id })
+        .toArray();
+    console.log(results);
+
+    res.send(results).status(200);
+});
+
 export default router;
