@@ -14,12 +14,16 @@ const connectionString = process.env.ATLAS_URI || ATLAS_URI;
 const client = new MongoClient(connectionString);
 
 let conn;
-try {
-    conn = await client.connect();
-} catch (e) {
-    console.error(e);
+
+
+const connect = async () => {
+    try {
+        await client.connect();
+    } catch (e) {
+        console.error(e);
+    }
+    return conn.db("AaronW5Corner");
 }
-let db = conn.db("AaronW5Corner");
 
 
 
@@ -42,53 +46,63 @@ router.get("/all/get", async (req, res) => {
     let results = await collection.find({})
         .toArray();
     console.log(results);
+    await client.close();
 
     res.send(results).status(200);
 });
 
 router.get("/backlogged/get", async (req, res) => {
+    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {status: 'backlog'};
     let results = await collection.find(query).sort({date: -1})
         .toArray();
     console.log(results);
+    await client.close();
 
     res.send(results).status(200);
 });
 
 router.get("/completed/get/:id", async (req, res) => {
+    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {status: 'finished', date: {$gte: new Date(`${req.params.id}-01-01`), $lte: new Date(`${req.params.id}-12-31`)}};
     let results = await collection.find(query).sort({date: -1})
         .toArray();
     console.log(results);
+    await client.close();
 
     res.send(results).status(200);
 });
 
 router.get("/completed/get", async (req, res) => {
+    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {status: 'finished'};
     let results = await collection.find(query).sort({date: -1})
         .toArray();
     console.log(results);
+    await client.close();
 
     res.send(results).status(200);
 });
 
 router.get("/:router", async (req, res) => {
+    let db = await connect();
     let collection = await db.collection("Backlog");
     let query = { router: req.params.router };
     let result = await collection.findOne(query);
+    await client.close();
 
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);
 });
 
 router.get("/playing/get", async (req, res) => {
+    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {status:'playing'}
@@ -100,18 +114,22 @@ router.get("/playing/get", async (req, res) => {
 });
 
 router.post("/:router", async (req, res) => {
+    let db = await connect();
     let collection = await db.collection("Backlog");
     const query = { router: req.params.router };
     const updates = {
         id: req.body.id, status: req.body.status, game: req.body.game, date: req.body.date, rating: req.body.rating
     };
+    
 
     let result = await collection.insertOne(updates);
+    await client.close();
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);
 });
 
 router.patch("/:router", async (req, res) => {
+    let db = await connect();
     let collection = await db.collection("Backlog");
     const query = { router: req.params.router };
 
@@ -121,6 +139,7 @@ router.patch("/:router", async (req, res) => {
 
     let result = await collection.updateOne({ _id: new ObjectId(req.params.router) }, updates);
     console.log(result);
+    await client.close();
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);
 });
