@@ -57,10 +57,10 @@ router.get("/backlogged/get", async (req, res) => {
     res.send(results).status(200);
 });
 
-router.get("/backlogged/get/:year", async (req, res) => {
+router.get("/completed/get/:id", async (req, res) => {
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
-    let query = {status: 'backlog', date: {$gte: new Date(`${req.params.year}-01-01`), $lte: new Date(`${req.params.year}-12-31`)}};
+    let query = {status: 'backlog', date: {$gte: new Date(`${req.params.id}-01-01`), $lte: new Date(`${req.params.id}-12-31`)}};
     let results = await collection.find(query).sort({date: -1})
         .toArray();
     console.log(results);
