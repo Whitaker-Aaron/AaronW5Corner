@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
     let results = await collection.find({}).sort({date: -1}).limit(6)
         .toArray();
     console.log(results);
-    await client.close();
+
 
     res.send(results).status(200);
 });
@@ -43,7 +43,7 @@ router.get("/all/get", async (req, res) => {
     let results = await collection.find({})
         .toArray();
     console.log(results);
-    await client.close();
+
 
     res.send(results).status(200);
 });
@@ -55,7 +55,7 @@ router.get("/backlogged/get", async (req, res) => {
     let results = await collection.find(query).sort({date: -1})
         .toArray();
     console.log(results);
-    await client.close();
+
 
     res.send(results).status(200);
 });
@@ -67,7 +67,7 @@ router.get("/completed/get/:id", async (req, res) => {
     let results = await collection.find(query).sort({date: -1})
         .toArray();
     console.log(results);
-    await client.close();
+
 
     res.send(results).status(200);
 });
@@ -79,7 +79,7 @@ router.get("/completed/get", async (req, res) => {
     let results = await collection.find(query).sort({date: -1})
         .toArray();
     console.log(results);
-    await client.close();
+
 
     res.send(results).status(200);
 });
@@ -88,7 +88,7 @@ router.get("/:router", async (req, res) => {
     let collection = await db.collection("Backlog");
     let query = { router: req.params.router };
     let result = await collection.findOne(query);
-    await client.close();
+
 
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);
@@ -101,7 +101,7 @@ router.get("/playing/get", async (req, res) => {
     let results = await collection.find(query)
         .toArray();
     console.log(results);
-    await client.close();
+
 
     res.send(results).status(200);
 });
@@ -115,7 +115,7 @@ router.post("/:router", async (req, res) => {
     
 
     let result = await collection.insertOne(updates);
-    await client.close();
+
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);
 });
@@ -130,11 +130,15 @@ router.patch("/:router", async (req, res) => {
 
     let result = await collection.updateOne({ _id: new ObjectId(req.params.router) }, updates);
     console.log(result);
-    await client.close();
+
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);
 });
 
+process.on('SIGINT', function() {
+    client.close();
+    process.exit();
+});
 
 
 export default router;
