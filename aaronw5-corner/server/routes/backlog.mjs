@@ -22,13 +22,14 @@ const connect = async () => {
     } catch (e) {
         console.error(e);
     }
-    return conn.db("AaronW5Corner");
+    return await conn.db("AaronW5Corner");
 }
 
 
 
 // Get a list of 50 posts
 router.get("/", async (req, res) => {
+    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {};
@@ -40,6 +41,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/all/get", async (req, res) => {
+    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {};
