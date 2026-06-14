@@ -14,34 +14,29 @@ const connectionString = process.env.ATLAS_URI || ATLAS_URI;
 const client = new MongoClient(connectionString);
 
 let conn;
-
-
-const connect = async () => {
-    try {
-        await client.connect();
-    } catch (e) {
-        console.error(e);
-    }
-    return await conn.db("AaronW5Corner");
+try {
+    conn = await client.connect();
+} catch (e) {
+    console.error(e);
 }
+let db = conn.db("AaronW5Corner");
 
 
 
 // Get a list of 50 posts
 router.get("/", async (req, res) => {
-    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {};
     let results = await collection.find({}).sort({date: -1}).limit(6)
         .toArray();
     console.log(results);
+    await client.close();
 
     res.send(results).status(200);
 });
 
 router.get("/all/get", async (req, res) => {
-    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {};
@@ -54,7 +49,6 @@ router.get("/all/get", async (req, res) => {
 });
 
 router.get("/backlogged/get", async (req, res) => {
-    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {status: 'backlog'};
@@ -67,7 +61,6 @@ router.get("/backlogged/get", async (req, res) => {
 });
 
 router.get("/completed/get/:id", async (req, res) => {
-    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {status: 'finished', date: {$gte: new Date(`${req.params.id}-01-01`), $lte: new Date(`${req.params.id}-12-31`)}};
@@ -80,7 +73,6 @@ router.get("/completed/get/:id", async (req, res) => {
 });
 
 router.get("/completed/get", async (req, res) => {
-    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {status: 'finished'};
@@ -93,7 +85,6 @@ router.get("/completed/get", async (req, res) => {
 });
 
 router.get("/:router", async (req, res) => {
-    let db = await connect();
     let collection = await db.collection("Backlog");
     let query = { router: req.params.router };
     let result = await collection.findOne(query);
@@ -104,19 +95,18 @@ router.get("/:router", async (req, res) => {
 });
 
 router.get("/playing/get", async (req, res) => {
-    let db = await connect();
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = {status:'playing'}
     let results = await collection.find(query)
         .toArray();
     console.log(results);
+    await client.close();
 
     res.send(results).status(200);
 });
 
 router.post("/:router", async (req, res) => {
-    let db = await connect();
     let collection = await db.collection("Backlog");
     const query = { router: req.params.router };
     const updates = {
@@ -131,7 +121,6 @@ router.post("/:router", async (req, res) => {
 });
 
 router.patch("/:router", async (req, res) => {
-    let db = await connect();
     let collection = await db.collection("Backlog");
     const query = { router: req.params.router };
 
