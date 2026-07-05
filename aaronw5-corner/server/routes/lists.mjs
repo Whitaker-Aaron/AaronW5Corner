@@ -19,6 +19,18 @@ try {
 }
 let db = conn.db("AaronW5Corner");
 
+router.get("/", async (req, res) => {
+    let collection = await db.collection("Lists");
+    //const { limit } = req.body
+    let query = {};
+    let results = await collection.find({})
+        .toArray();
+    console.log(results);
+
+
+    res.send(results).status(200);
+});
+
 router.get("/:router", async (req, res) => {
     let collection = await db.collection("Lists");
     let query = { router: req.params.router };
