@@ -5,6 +5,7 @@ import articles from "./routes/articles.mjs";
 import latest from "./routes/latest.mjs"
 import goty from "./routes/goty.mjs"
 import games from "./routes/games.mjs"
+import lists from "./routes/lists.mjs"
 import backlog from "./routes/backlog.mjs"
 import axios from "axios";
 import cors from "cors";
@@ -41,6 +42,7 @@ app.use("/articles", articles);
 app.use("/latest", latest);
 app.use("/goty", goty);
 app.use("/backlog", backlog);
+app.use("/lists", lists);
 app.use("/games", function (req, res, next) {
     req.conn_config = {
         ClientID: '19eyfm04nkljpa15u9skvqu4lztbdx',
