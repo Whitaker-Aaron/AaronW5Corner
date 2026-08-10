@@ -94,6 +94,16 @@ router.get("/:router", async (req, res) => {
     else res.send(result).status(200);
 });
 
+router.get("/all/get/:id", async (req, res) => {
+    let collection = await db.collection("Backlog");
+    let query = { id: req.params.id };
+    let result = await collection.findOne(query);
+
+
+    if (!result) res.send("Not found").status(404);
+    else res.send(result).status(200);
+});
+
 router.get("/playing/get", async (req, res) => {
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
