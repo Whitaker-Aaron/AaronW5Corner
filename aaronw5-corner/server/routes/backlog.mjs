@@ -84,6 +84,18 @@ router.get("/completed/get", async (req, res) => {
     res.send(results).status(200);
 });
 
+router.get("/library/get", async (req, res) => {
+    let collection = await db.collection("Backlog");
+    //const { limit } = req.body
+    let query = {library:  { $exists: true } };
+    let results = await collection.find(query).sort({date: -1})
+        .toArray();
+    console.log(results);
+
+
+    res.send(results).status(200);
+});
+
 router.get("/:router", async (req, res) => {
     let collection = await db.collection("Backlog");
     let query = { router: req.params.router };
