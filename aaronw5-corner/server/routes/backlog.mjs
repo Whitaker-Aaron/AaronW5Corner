@@ -132,7 +132,7 @@ router.post("/:router", async (req, res) => {
     let collection = await db.collection("Backlog");
     const query = { router: req.params.router };
     const updates = {
-        id: req.body.id, status: req.body.status, game: req.body.game, date: req.body.date, rating: req.body.rating
+        id: req.body.id, status: req.body.status, game: req.body.game, date: req.body.date, rating: req.body.rating, library: req.body.library
     };
     
 
