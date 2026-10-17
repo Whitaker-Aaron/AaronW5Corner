@@ -64,7 +64,7 @@ router.get("/backlogged/get/upcoming", async (req, res) => {
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
     let query = 
-    {status: 'backlog', priority: {$in:['high', 'highest']}};
+    {status: 'backlog', priority: {$in:['HIGH', 'HIGHEST']}};
     let results = await collection.find(query).sort({date: -1})
         .toArray();
     console.log(results);
