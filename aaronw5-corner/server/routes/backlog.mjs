@@ -60,6 +60,19 @@ router.get("/backlogged/get", async (req, res) => {
     res.send(results).status(200);
 });
 
+router.get("/backlogged/get/upcoming", async (req, res) => {
+    let collection = await db.collection("Backlog");
+    //const { limit } = req.body
+    let query = 
+    {$or: [{status: 'backlog', date: {$gte: new Date()}, priority: 'high'}, {status: 'backlog', date: {$gte: new Date()}, priority: 'highest'}]};
+    let results = await collection.find(query).sort({date: -1})
+        .toArray();
+    console.log(results);
+
+
+    res.send(results).status(200);
+});
+
 router.get("/completed/get/:id", async (req, res) => {
     let collection = await db.collection("Backlog");
     //const { limit } = req.body
