@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     let collection = await db.collection("GOTY");
-    let results = await collection.find({ year: req.params.id }).sort({year: -1}
+    let results = await collection.find({ year: req.params.id }).sort({year: -1})
         .toArray();
     console.log(results);
 
