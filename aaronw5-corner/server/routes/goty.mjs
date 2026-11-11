@@ -22,7 +22,7 @@ let db = conn.db("AaronW5Corner");
 // Get a list of 50 posts
 router.get("/", async (req, res) => {
     let collection = await db.collection("GOTY");
-    let results = await collection.find({category:'GOTY'}).sort({year: -1}
+    let results = await collection.find({category:'GOTY'}).sort({year: -1})
         .limit(200)
         .toArray();
     console.log(results);
